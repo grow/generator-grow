@@ -25,7 +25,7 @@ gulp.task('pre-test', function () {
   return gulp.src('generators/**/*.js')
     .pipe(excludeGitignore())
     .pipe(istanbul({
-      includeUntested: true
+      includeUntested: false
     }))
     .pipe(istanbul.hookRequire());
 });

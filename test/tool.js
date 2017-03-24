@@ -11,7 +11,10 @@ describe('generator-grow:tool', () => {
 
   it('creates files', () => {
     assert.file([
-      'dummyfile.txt'
+      'package.json',
+      'README.md',
+      'tool.css',
+      'tool.js'
     ]);
   });
 });

@@ -7,7 +7,7 @@ module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the stellar ' + chalk.red('grow') + ' generator!'
+      'Welcome to the stellar ' + chalk.red('grow tool') + ' generator!'
     ));
 
     const prompts = [{
@@ -25,8 +25,23 @@ module.exports = class extends Generator {
 
   writing() {
     this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+      this.templatePath('package.json'),
+      this.destinationPath('package.json')
+    );
+
+    this.fs.copy(
+      this.templatePath('README.md'),
+      this.destinationPath('README.md')
+    );
+
+    this.fs.copy(
+      this.templatePath('tool.css'),
+      this.destinationPath('tool.css')
+    );
+
+    this.fs.copy(
+      this.templatePath('tool.js'),
+      this.destinationPath('tool.js')
     );
   }
 
