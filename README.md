@@ -1,4 +1,4 @@
-# generator-grow [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# Grow Generator [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
 > Grow site generator.
 
 ## Installation
@@ -16,12 +16,11 @@ Then generate your new project:
 yo grow
 ```
 
-## Getting To Know Yeoman
+## Getting To Know Grow
 
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
+ * Grow is a declarative, file-based microsite generator.
+ * Grow has flexible localization and translation tools.
+ * Feel free to [learn more about Grow](https://grow.io/).
 
 ## License
 
