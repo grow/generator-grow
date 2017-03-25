@@ -2,7 +2,6 @@
 var path = require('path');
 var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
-var _ = require('lodash');
 
 describe('generator-grow:tool', () => {
   beforeEach(() => {
