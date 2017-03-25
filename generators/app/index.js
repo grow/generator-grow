@@ -10,20 +10,17 @@ module.exports = class extends Generator {
       'Welcome to the stellar ' + chalk.red('grow') + ' generator!'
     ));
 
-    const prompts = [{
-      type: 'confirm',
-      name: 'someAnswer',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
+    this.log('Unfortunately, we don\'t have the grow generator created yet.');
+
+    const prompts = [];
 
     return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
       this.props = props;
     });
   }
 
   writing() {
+    // Nothing yet...
     this.fs.copy(
       this.templatePath('dummyfile.txt'),
       this.destinationPath('dummyfile.txt')
@@ -31,6 +28,6 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.installDependencies();
+    //this.installDependencies();
   }
 };
