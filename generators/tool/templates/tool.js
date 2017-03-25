@@ -18,8 +18,8 @@
   };
 
   grow.ui.tools.push({
-    kind: 'my-project',
-    name: 'My Project',
+    kind: '<%= nameShort %>',
+    name: '<%= nameLong %>',
     button: {
       events: {
         click: triggerTool
