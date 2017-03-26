@@ -24,12 +24,6 @@ describe('grow:tool', () => {
       return helpers.run(require.resolve('../generators/tool'))
         .withPrompts(answers)
         .then(() => {
-          assert.file([
-            'README.md',
-            'tool.css',
-            'tool.js'
-          ]);
-
           assert.file('package.json');
           assert.jsonFileContent('package.json', {
             name: 'grow-tool-test',

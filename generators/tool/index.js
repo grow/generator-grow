@@ -1,13 +1,10 @@
 'use strict';
+const _ = require('lodash');
 const Generator = require('yeoman-generator');
 const askName = require('inquirer-npm-name');
-const chalk = require('chalk');
 const extend = require('deep-extend');
 const parseAuthor = require('parse-author');
 const path = require('path');
-const yosay = require('yosay');
-const _ = require('lodash');
-
 const toolPrefix = 'grow-tool-';
 
 function makeToolName(name) {
