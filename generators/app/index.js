@@ -40,7 +40,7 @@ module.exports = class extends Generator {
     }
   }
 
-  _askForModuleName() {
+  prompting() {
     if (this.pkg.name || this.options.name) {
       this.props.name = this.pkg.name || _.kebabCase(this.options.name);
       return Promise.resolve();
@@ -59,46 +59,10 @@ module.exports = class extends Generator {
     });
   }
 
-  _askFor() {
-    const prompts = [{
-      name: 'description',
-      message: 'Description',
-      when: !this.props.description
-    }, {
-      name: 'homepage',
-      message: 'Project homepage url',
-      when: !this.props.homepage
-    }, {
-      name: 'authorName',
-      message: 'Author\'s Name',
-      when: !this.props.authorName,
-      default: this.user.git.name(),
-      store: true
-    }, {
-      name: 'authorEmail',
-      message: 'Author\'s Email',
-      when: !this.props.authorEmail,
-      default: this.user.git.email(),
-      store: true
-    }, {
-      name: 'authorUrl',
-      message: 'Author\'s Homepage',
-      when: !this.props.authorUrl,
-      store: true
-    }];
-
-    return this.prompt(prompts).then(props => {
-      this.props = extend(this.props, props);
-    });
-  }
-
-  prompting() {
-    return this._askForModuleName()
-      .then(this._askFor.bind(this));
-  }
-
   default() {
-    this.composeWith(require.resolve('../base'), this.props);
+    this.composeWith(require.resolve('../base'), {
+      name: this.props.name
+    });
   }
 
   installing() {

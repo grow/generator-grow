@@ -47,22 +47,81 @@ module.exports = class extends Generator {
     });
   }
 
+  initializing() {
+    this.props = {};
+
+    var optionKeys = [
+      'description', 'authorName', 'authorEmail', 'authorUrl', 'homepage'];
+    for (var i in optionKeys.length) {
+      var key = optionKeys[i];
+      if (this.options[key]) {
+        this.props[key] = this.options[key];
+      }
+    }
+  }
+
+  prompting() {
+    var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
+
+    const prompts = [{
+      name: 'description',
+      message: 'Description',
+      when: !this.props.description
+    }, {
+      name: 'homepage',
+      message: 'Project homepage url',
+      when: !this.props.homepage
+    }, {
+      name: 'authorName',
+      message: 'Author\'s Name',
+      when: !this.props.authorName,
+      default: this.user.git.name(),
+      store: true
+    }, {
+      name: 'authorEmail',
+      message: 'Author\'s Email',
+      when: !this.props.authorEmail,
+      default: this.user.git.email(),
+      store: true
+    }, {
+      name: 'authorUrl',
+      message: 'Author\'s Homepage',
+      when: !this.props.authorUrl,
+      store: true
+    }, {
+      name: 'keywords',
+      message: 'Package keywords (comma to split)',
+      when: !pkg.keywords,
+      filter(words) {
+        return words.split(/\s*,\s*/g);
+      }
+    }];
+
+    return this.prompt(prompts).then(props => {
+      this.props = extend(this.props, props);
+    });
+  }
+
   writing() {
-    console.log('writing', this.options);
     var currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
     var pkg = extend({
       name: _.kebabCase(this.options.name),
       version: '0.0.0',
-      description: this.options.description,
-      homepage: this.options.homepage,
+      description: this.props.description,
+      homepage: this.props.homepage,
       author: {
-        name: this.options.authorName,
-        email: this.options.authorEmail,
-        url: this.options.authorUrl
+        name: this.props.authorName,
+        email: this.props.authorEmail,
+        url: this.props.authorUrl
       },
       keywords: ['grow'],
       devDependencies: {}
     }, currentPkg);
+
+    // Combine the keywords
+    if (this.props.keywords && this.props.keywords.length) {
+      pkg.keywords = _.uniq(this.props.keywords.concat(pkg.keywords));
+    }
 
     this.fs.writeJSON(this.destinationPath('package.json'), pkg);
 

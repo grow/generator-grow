@@ -13,15 +13,18 @@ describe('grow:base', () => {
   describe('running on new project', () => {
     it('scaffold a full project', () => {
       const answers = {
-        name: 'grow-test',
         description: 'A grow base test',
         homepage: 'http://grow.io',
         authorName: 'The Grow Team',
         authorEmail: 'hi@grow.io',
-        authorUrl: 'http://grow.io'
+        authorUrl: 'http://grow.io',
+        keywords: ['test', 'words']
       };
       return helpers.run(require.resolve('../generators/base'))
-        .withOptions(answers)
+        .withOptions({
+          name: 'grow-test'
+        })
+        .withPrompts(answers)
         .then(() => {
           assert.file('package.json');
           assert.jsonFileContent('package.json', {
@@ -34,7 +37,7 @@ describe('grow:base', () => {
               email: answers.authorEmail,
               url: answers.authorUrl
             },
-            keywords: ['grow']
+            keywords: ['test', 'words', 'grow']
           });
 
           assert.file('README.md');
