@@ -17,6 +17,8 @@ install:
 - npm install -g yo
 - npm link
 
-script:
+after_script:
+- mkdir testBuild
+- cd testBuild
 - yo grow --name yo-grow-site --description Testing --authorName Travis --authorEmail hello@grow.io --authorUrl grow.io --homepage grow.io --keywords testing
 - grow build
