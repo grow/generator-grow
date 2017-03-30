@@ -1,16 +1,11 @@
-language: node_js
-node_js:
-- v7
-- v6
-- v5
-- v4
+language: python
+
+python: 2.7
+
+cache: pip
 
 before_install:
-  - sudo apt-get -y install python2.7
-  - sudo pip install -U setuptools
-  - sudo pip install -U virtualenvwrapper
-  - python -V
-  - pip -V
+- nvm install v7
 
 install:
 - pip install grow
