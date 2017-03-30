@@ -1,6 +1,15 @@
 language: node_js
 node_js:
-  - v7
-  - v6
-  - v5
-  - v4
+- v7
+- v6
+- v5
+- v4
+
+install:
+- pip install grow
+- npm install -g yo
+- npm link
+
+script:
+- yo grow --name yo-grow-site --description Testing --authorName Travis --authorEmail hello@grow.io --authorUrl grow.io --homepage grow.io --keywords testing
+- grow build

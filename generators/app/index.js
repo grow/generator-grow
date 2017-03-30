@@ -60,9 +60,8 @@ module.exports = class extends Generator {
   }
 
   default() {
-    this.composeWith(require.resolve('../base'), {
-      name: this.props.name
-    });
+    var composeOptions = extend({}, this.options, this.props);
+    this.composeWith(require.resolve('../base'), composeOptions);
   }
 
   installing() {

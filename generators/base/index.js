@@ -45,23 +45,36 @@ module.exports = class extends Generator {
       required: true,
       desc: 'Project homepage'
     });
+
+    this.option('keywords', {
+      type: String,
+      required: true,
+      desc: 'Project keywords'
+    });
   }
 
   initializing() {
     this.props = {};
 
+    console.log('initializing');
+
     var optionKeys = [
-      'description', 'authorName', 'authorEmail', 'authorUrl', 'homepage'];
-    for (var i in optionKeys.length) {
-      var key = optionKeys[i];
-      if (this.options[key]) {
+      'description', 'authorName', 'authorEmail', 'authorUrl', 'homepage', 'keywords'];
+    optionKeys.forEach(function(key) {
+      if (key in this.options) {
         this.props[key] = this.options[key];
       }
+    }.bind(this));
+
+    if (this.props.keywords) {
+      this.props.keywords = this.props.keywords.split(/\s*,\s*/g);
     }
   }
 
   prompting() {
     var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
+
+    console.log('props', this.props);
 
     const prompts = [{
       name: 'description',
@@ -91,7 +104,7 @@ module.exports = class extends Generator {
     }, {
       name: 'keywords',
       message: 'Package keywords (comma to split)',
-      when: !pkg.keywords,
+      when: !pkg.keywords && !this.props.keywords,
       filter(words) {
         return words.split(/\s*,\s*/g);
       }
