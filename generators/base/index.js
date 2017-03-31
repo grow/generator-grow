@@ -56,8 +56,6 @@ module.exports = class extends Generator {
   initializing() {
     this.props = {};
 
-    console.log('initializing');
-
     var optionKeys = [
       'description', 'authorName', 'authorEmail', 'authorUrl', 'homepage', 'keywords'];
     optionKeys.forEach(function(key) {
@@ -73,8 +71,6 @@ module.exports = class extends Generator {
 
   prompting() {
     var pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
-
-    console.log('props', this.props);
 
     const prompts = [{
       name: 'description',
